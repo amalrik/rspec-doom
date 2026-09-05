@@ -1,0 +1,7 @@
+*.gem
+/.bundle/
+/pkg/
+/tmp/
+/coverage/
+/bin/console
+/bin/setup

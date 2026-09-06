@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'rspec-doom'
-  spec.version       = '0.1.0'
+  spec.version       = '0.1.1'
   spec.authors       = ['Amalrik Maia']
   spec.email         = ['amalrik.maia@gmail.com']
   spec.summary       = 'RSpec file watcher with Doom-themed notifications'

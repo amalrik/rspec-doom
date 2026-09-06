@@ -6,6 +6,8 @@ automatically and shows Doom Guy images based on test results.
 Built on [Cruise](https://github.com/marcoroth/cruise), a fast OS-native file
 watcher — no Guard required.
 
+> **Read more:** [Still way beyond cool: resurrecting the Doomguy TDD loop](https://amalrik.github.io/posts/still-way-beyond-cool-doomguy-tdd-loop/) — the story behind this gem, and the 2007 post that started it all.
+
 ## Installation
 
 Add to your Gemfile:

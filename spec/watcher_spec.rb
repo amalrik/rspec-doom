@@ -38,8 +38,14 @@ RSpec.describe RSpecDoom::Watcher do
   end
 
   describe '#paths_for' do
-    it 'returns the spec file for a changed spec' do
+    it 'returns the spec file for a changed spec that exists' do
+      allow(File).to receive(:file?).with('spec/foo_spec.rb').and_return(true)
       expect(watcher.paths_for('spec/foo_spec.rb')).to eq(['spec/foo_spec.rb'])
+    end
+
+    it 'returns no paths for a deleted spec (run whole suite)' do
+      allow(File).to receive(:file?).with('spec/foo_spec.rb').and_return(false)
+      expect(watcher.paths_for('spec/foo_spec.rb')).to eq([])
     end
 
     it 'maps a source file to its spec when the spec exists' do
@@ -61,6 +67,12 @@ RSpec.describe RSpecDoom::Watcher do
 
     it 'ignores non-ruby files' do
       expect(watcher.paths_for('app/views/foo.html.erb')).to eq([])
+    end
+  end
+
+  describe 'EVENTS_INTERESTED_IN' do
+    it 'includes removals so deleted specs trigger a rerun' do
+      expect(described_class::EVENTS_INTERESTED_IN).to include(:removed)
     end
   end
 end

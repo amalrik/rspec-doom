@@ -4,7 +4,7 @@ require 'cruise'
 
 module RSpecDoom
   class Watcher
-    EVENTS_INTERESTED_IN = %i[modified created renamed changed].freeze
+    EVENTS_INTERESTED_IN = %i[modified created renamed changed removed].freeze
     DEFAULT_DEBOUNCE = 0.1
 
     attr_reader :options
@@ -40,14 +40,15 @@ module RSpecDoom
 
     # The list of spec files to run for a changed path.
     #
-    #   spec/foo_spec.rb            -> ['spec/foo_spec.rb']
-    #   app/models/foo.rb (exists)  -> ['spec/models/foo_spec.rb'] (if exists)
-    #   app/models/foo.rb (no spec) -> [] (run whole suite)
+    #   spec/foo_spec.rb (exists)      -> ['spec/foo_spec.rb']
+    #   spec/foo_spec.rb (deleted)     -> [] (run whole suite)
+    #   app/models/foo.rb (exists)     -> ['spec/models/foo_spec.rb'] (if exists)
+    #   app/models/foo.rb (no spec)    -> [] (run whole suite)
     def paths_for(event_path)
       relative = relative_path(event_path)
 
       if spec_file?(relative)
-        [relative]
+        File.file?(relative) ? [relative] : []
       elsif source_file?(relative)
         spec_for_source(relative)
       else

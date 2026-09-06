@@ -34,6 +34,10 @@ module RSpecDoom
           options[:debounce] = sec
         end
 
+        opts.on('--notify-file PATH', 'Write notifications to a file (useful for headless/CI)') do |path|
+          options[:notifiers] = [[:file, { path: path, format: "%s|%s|%s\n" }]]
+        end
+
         opts.on('-h', '--help', 'Show this help') do
           puts opts
           exit

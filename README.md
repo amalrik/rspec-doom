@@ -40,6 +40,7 @@ no matching spec exists).
 bundle exec rspec-doom lib spec          # watch extra directories
 bundle exec rspec-doom --cmd 'rspec'     # custom RSpec command
 bundle exec rspec-doom --debounce 0.5    # debounce in seconds
+bundle exec rspec-doom --notify-file n   # write notifications to a file (headless/CI)
 ```
 
 Press Ctrl-C to stop.
@@ -53,6 +54,11 @@ The gem includes 5 Doom-themed images (via Notiffany desktop notifications):
 - `doom3.png` — 3-5 failures
 - `doom4.png` — 6-10 failures
 - `doom5.png` — 11+ failures
+
+The images are Doom HUD sprites from id Software, included here as a fan and
+educational homage to the classic *autotest + growl + Doomguy* setup. DOOM and
+its sprites are trademarks of id Software or their respective owners; this
+project is not affiliated with or endorsed by id Software.
 
 ## Development
 
